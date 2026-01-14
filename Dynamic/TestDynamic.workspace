@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="MyDynamicLib/MyDynamicLib.cbp" />
+		<Project filename="TestDynamic/TestDynamic.cbp">
+			<Depends filename="MyDynamicLib/MyDynamicLib.cbp" />
+		</Project>
+		<Project filename="../Example2/SharedLibrary/SharedLibrary.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

@@ -1,0 +1,27 @@
+gcc.exe -Wall -fPIC -g  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\MyDynamicLib\MyDynamicLib.c -o obj\Debug\MyDynamicLib.o
+gcc.exe -shared -Wl,--output-def=bin\Debug\libMyDynamicLib.def  -Wl,--dll  obj\Debug\MyDynamicLib.o  -o bin\Debug\libMyDynamicLib.dll  
+Output file is bin\Debug\libMyDynamicLib.dll with size 47.80 KB
+
+
+
+
+gcc.exe -L. -lMyDynamicLib -o bin\Debug\TestDynamic.exe obj\Debug\TestLib.o
+
+
+desde a root dos prjectos
+E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic>gcc.exe -Lbin\debug -lMyDynamicL
+ib -o bin\Debug\TestDynamic.exe obj\Debug\TestLib.o   OK
+
+
+
+gcc.exe -LE:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\MyDynamicLib\bin\Debug -lMyDynamicLib -o bin\Debug\TestDynamic.exe obj\Debug\TestLib.o
+MyDynamicLib\bin\Debug
+
+
+
+
+gcc.exe -Wall -Wall -g  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\TestDynamic\TestLib.c -o obj\Debug\TestLib.o
+g++.exe  -o bin\Debug\TestLib.exe obj\Debug\TestLib.o   ..\MyDynamicLib\bin\Debug\libMyDynamicLib.dll
+
+
+gcc.exe  -o bin\Debug\TestLib.exe obj\Debug\TestLib.o   ..\MyDynamicLib\bin\Debug\libMyDynamicLib.dll   OK

@@ -1,0 +1,19 @@
+
+Build: Debug in MyStaticLib
+
+gcc.exe -Wall -g  -c MyStaticLib.c -o obj\Debug\MyStaticLib.o
+
+cmd /c if exist bin\Debug\libMyStaticLib.a del bin\Debug\libMyStaticLib.a
+
+ar.exe -r -s bin\Debug\libMyStaticLib.a obj\Debug\MyStaticLib.o
+ 
+
+
+Build: Release in MyStaticLib
+
+gcc.exe -O2 -Wall  -c MyStaticLib.c -o obj\Release\MyStaticLib.o
+
+cmd /c if exist bin\Release\libMyStaticLib.a del bin\Release\libMyStaticLib.a
+
+ar.exe -r -s bin\Release\libMyStaticLib.a obj\Release\MyStaticLib.o
+

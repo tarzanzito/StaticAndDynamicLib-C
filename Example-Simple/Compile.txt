@@ -1,0 +1,33 @@
+
+Delete files
+del libMyDynamicLib.def
+del libMyDynamicLib.dll
+del MyDynamicLib.o
+del TestLib.exe
+del TestLib.o
+
+
+1 - Dynamic Lib
+---------------
+
+1.1 - Create object 
+gcc.exe -Wall -fPIC -g -c MyDynamicLib.c -o MyDynamicLib.o
+output: MyDynamicLib.o
+
+1.2 Create Dll
+gcc.exe -shared -Wl,--output-def=libMyDynamicLib.def  -Wl,--dll MyDynamicLib.o -o libMyDynamicLib.dll
+output: libMyDynamicLib.def, libMyDynamicLib.dll
+
+linux
+gcc.exe -shared MyDynamicLib.o -o libMyDynamicLib.so
+
+2 - App 
+-------
+
+2.1 Create object
+gcc.exe -Wall -g -c TestLib.c -o TestLib.o
+output: TestLib.o
+
+2.2 Create app
+gcc.exe -o TestLib.exe -L. -lMyDynamicLib  TestLib.o
+output: TestLib.exe

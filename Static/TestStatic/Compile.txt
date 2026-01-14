@@ -1,0 +1,17 @@
+
+//Build: Debug in MyStaticLib
+
+gcc.exe -Wall -g  -c MyStaticLib\MyStaticLib.c -o obj\Debug\MyStaticLib.o
+
+cmd /c if exist bin\Debug\libMyStaticLib.a del bin\Debug\libMyStaticLib.a
+
+ar.exe -r -s bin\Debug\libMyStaticLib.a obj\Debug\MyStaticLib.o  (prefix with lib*) 
+ar.exe -r -s bin\Debug\MyStaticLib.a obj\Debug\MyStaticLib.o  (test no-prefix) 
+ 
+
+//Build: Debug in TesteStatic 
+
+gcc.exe -Wall -g  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\TesteStatic\main.c -o obj\Debug\main.o
+gcc.exe  -o bin\Debug\TesteStatic.exe obj\Debug\main.o   ..\MyStaticLib\bin\Debug\libMyStaticLib.a
+gcc.exe  -o bin\Debug\TesteStatic.exe obj\Debug\main.o   ..\MyStaticLib\bin\Debug\MyStaticLib.a  (test)
+gcc.exe  -o bin\Debug\TesteStatic.exe obj\Debug\main.o   ..\MyStaticLib\bin\Debug\MyStaticLib.o  (test)

@@ -1,0 +1,88 @@
+
+//gcc.exe -Wall -g -L./ -lMyDynamicLib.dll  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\TestDynamic\main.c -o obj\Debug\main.o
+//gcc.exe  -o bin\Debug\TesteStatic.exe obj\Debug\main.o
+//Output file is bin\Debug\TesteStatic.exe with size 53.43 KB
+
+
+//
+// Example of Dynamic Lib C
+//
+// Project setting //
+//-------------------
+//Project properties
+//right click on project -> properties -> Build targets -> Type -> Console Application
+//right click on project -> Build options -> Linker Settings -> Link Libraries -> Add -> MyStaticLib.a
+//-------------------
+//
+// Compile //
+//-----------
+
+//-------------- Build: Debug in MyDynamicLib (compiler: GNU GCC Compiler)---------------
+
+//gcc.exe -Wall -g  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\MyDynamicLib\MyDynamicLib.c -o obj\Debug\MyDynamicLib.o
+//gcc.exe -shared -Wl,--output-def=bin\Debug\libMyDynamicLib.def  -Wl,--dll  obj\Debug\MyDynamicLib.o  -o bin\Debug\MyDynamicLib.dll
+
+
+//gcc.exe -Wall -g -fPIC  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\MyDynamicLib\MyDynamicLib.c -o obj\Debug\MyDynamicLib.o
+//gcc.exe -shared -Wl,--output-def=bin\Debug\libMyDynamicLib.def  -Wl,--dll  obj\Debug\MyDynamicLib.o  -o bin\Debug\MyDynamicLi
+
+//-------------- Build: Debug in TestDynamic (compiler: GNU GCC Compiler)---------------
+
+//gcc.exe -Wall -g  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\TestDynamic\main.c -o obj\Debug\main.o
+//gcc.exe  -o bin\Debug\TesteStatic.exe obj\Debug\main.o
+//Output file is bin\Debug\TesteStatic.exe with size 53.43 KB
+//Process terminated with status 0 (0 minute(s), 0 second(s))
+//0 error(s), 0 warning(s) (0 minute(s), 0 second(s))
+
+
+//TestStatic
+//
+//gcc.exe -Wall -g  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\TesteStatic\main.c -o obj\Debug\main.o
+//gcc.exe  -o bin\Debug\TesteStatic.exe obj\Debug\main.o   ..\MyStaticLib\bin\Debug\MyStaticLib.a
+//gcc.exe -Wall -g -L./ -laaxx.dll  -c E:\_MEGA_DRIVE\_C\C_static_Dynamic_libs\Dynamic\TestDynamic\main.c -o obj\Debug\main.o
+//gcc.exe  -o bin\Debug\TesteStatic.exe obj\Debug\main.o
+// Info //
+//--------
+//ar.exe -r -c -s
+//or
+//ar.exe rcs
+//-r - replace existing pr insert new file<s> into the archive
+//-c - do not warn if the library had to be created
+//-s - do not build a symbol table
+//
+//---------------------------------------------
+
+//youtube
+//https://www.geeksforgeeks.org/c/how-to-create-a-static-library-in-c/
+//
+
+#include <stdio.h>
+#include "MyDynamicLib.h"
+
+//extern void SampleFuncti
+
+//https://www.youtube.com/watch?v=_VtnqLzakDIon1();
+
+//-L./ -lMyDynamicLib.dll
+
+int main(int argc, char *argv[])
+{
+//
+     printf("Hello world!\n");
+    SampleFunction1();
+    return 0;
+
+    //char *filename = "file.txt";
+    //int  name_len = 0;
+
+    // We show that void *fd (instead of FILE *) compiles and works
+    // We'll use this trick in Python (FILE not needed and too long to create)
+    //void *fd = FileOpen(filename, &name_len);
+    //printf("File '%s': name length = %d", filename, name_len);
+
+    //int  size = FileSize(fd);
+    //printf("File size = %d", size);
+
+}
+
+
