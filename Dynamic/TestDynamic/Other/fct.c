@@ -1,4 +1,3 @@
-
 // An example of functions for a dynamic library
 
 #include <string.h>
