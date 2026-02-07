@@ -5,6 +5,6 @@
 		<Project filename="TestDynamic/TestDynamic.cbp">
 			<Depends filename="MyDynamicLib/MyDynamicLib.cbp" />
 		</Project>
-		<Project filename="../Example2/SharedLibrary/SharedLibrary.cbp" />
+		<Project filename="TestDynamicLoader/TestDynamicLoader.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

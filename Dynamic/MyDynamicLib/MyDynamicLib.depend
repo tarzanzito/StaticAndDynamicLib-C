@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1767047142 source:e:\_mega_drive\_c\c_static_dynamic_libs\dynamic\mydynamiclib\mydynamiclib.c
+1770484954 source:e:\_mega_drive\__github\__synchronized\c\staticanddynamiclibs-c\dynamic\mydynamiclib\mydynamiclib.c
 	<stdio.h>
 	<string.h>
 	"MyDynamicLib.h"
 
-1767367785 e:\_mega_drive\_c\c_static_dynamic_libs\dynamic\mydynamiclib\mydynamiclib.h
+1767367785 e:\_mega_drive\__github\__synchronized\c\staticanddynamiclibs-c\dynamic\mydynamiclib\mydynamiclib.h
 

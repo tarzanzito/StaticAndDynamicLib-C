@@ -1,0 +1,13 @@
+
+Debug
+-----
+gcc.exe -Wall -fPIC -g  -c E:\_MEGA_DRIVE\__GitHub\__Synchronized\C\StaticAndDynamicLibs-C\Dynamic\MyDynamicLib\MyDynamicLib.c -o obj\Debug\MyDynamicLib.o
+
+gcc.exe -shared -Wl,--output-def=bin\Debug\libMyDynamicLib.def  -Wl,--dll  obj\Debug\MyDynamicLib.o  -o bin\Debug\libMyDynamicLib.dll  
+
+
+Release
+-------
+gcc.exe -O2 -Wall -fPIC  -c E:\_MEGA_DRIVE\__GitHub\__Synchronized\C\StaticAndDynamicLibs-C\Dynamic\MyDynamicLib\MyDynamicLib.c -o obj\Release\MyDynamicLib.o
+
+gcc.exe -shared -Wl,--output-def=bin\Release\libMyDynamicLib.def  -Wl,--dll  obj\Release\MyDynamicLib.o  -o bin\Release\libMyDynamicLib.dll  

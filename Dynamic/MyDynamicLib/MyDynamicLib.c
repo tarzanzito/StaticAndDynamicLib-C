@@ -25,28 +25,30 @@
 #include <string.h>
 #include "MyDynamicLib.h"
 
+void SampleFunction1()
+{
+    // insert code here
+	printf("Hello from: SampleFunction1!\n");
+}
+
 // A function adding two integers and returning the result
 int SampleAddInt(int a, int b)
 {
     int ret = a + b;
-    printf("Hello, SampleAddInt(%d, %d) is %d\n", a, b, ret);
+    printf("Hello from: SampleAddInt(%d, %d) is %d\n", a, b, ret);
 
     return ret;
 }
 
 // A function doing nothing ;)
-void SampleFunction1()
-{
-    // insert code here
-	printf("Hello, SampleFunction1!\n");
-}
+
 
 // A function always returning zero
 int SampleFunction2(char* text)
 {
     int ret = strlen(text);
     // insert code here
-	printf("Hello, %d SampleFunction2('%s')\n", ret, text);
+	printf("Hello from: SampleFunction2('%s') is %d\n", text, ret);
 
     return ret;
 }

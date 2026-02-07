@@ -13,9 +13,8 @@
 	<stdio.h>
 	"../MyDynamicLib/MyDynamicLib.h"
 
-1770490028 source:e:\_mega_drive\__github\__synchronized\c\staticanddynamiclibs-c\dynamic\testdynamic\testlib.c
+1770482579 source:e:\_mega_drive\__github\__synchronized\c\staticanddynamiclibs-c\dynamic\testdynamicloader\testlibwithloader.c
 	<stdio.h>
-	"../MyDynamicLib/MyDynamicLib.h"
-
-1767367785 e:\_mega_drive\__github\__synchronized\c\staticanddynamiclibs-c\dynamic\mydynamiclib\mydynamiclib.h
+	<stdlib.h>
+	<dlfcn.h>
 
