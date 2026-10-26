@@ -1,0 +1,36 @@
+windows problem
+----------------
+
+Tanto nos terminais MSYS2-64 (UCRT64) , powershell e msdos caso a dll nao exista ou tenha outro nome o programa executa e não mostra erro.
+Mas vem com return code diferente de  zero.
+Chamdo  silent crash (fecho silencioso) 
+
+
+Proposta para windows:
+
+#include <stdio.h>
+#include <windows.h> // API nativa do Windows para carregar ficheiros
+
+int main() {
+    // 1. Tenta carregar o ficheiro manualmente na memória
+    HMODULE hLib = LoadLibrary("libmath.dll");
+    
+    // 2. Se falhar (ex: se renomeaste para libxpto.dll), nós capturamos o erro!
+    if (hLib == NULL) {
+        printf("\n==================================================\n");
+        printf("[ERRO CRITICO] A biblioteca 'libmath.dll' nao foi encontrada!\n");
+        printf("O programa nao pode continuar.\n");
+        printf("==================================================\n");
+        return 1; // Sai de forma limpa e visivel
+    }
+
+    printf("Sucesso: A DLL foi encontrada e carregada com sucesso!\n");
+    
+
+
+
+    // Liberta a biblioteca ao fechar
+    FreeLibrary(hLib);
+
+    return 0;
+}

@@ -1,0 +1,12 @@
+//Compile
+// # gcc -c -o main.o main.c
+
+// -c  = compile only to object
+
+ //Creating executable
+
+// #  gcc main.o -o program -L. -lMyDynamicLib              se windows e SYS2 precisa ser extensao .dll
+// #  gcc main.c -o program -L./libs -lmatematica
+
+//verify that you did it and have the right functions as dynamic symbols you can use:
+ // # nm -D libmarh.so

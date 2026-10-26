@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1767289675 source:e:\_mega_drive\_c\c_static_dynamic_libs\dynamic\testdynamic\main.c
+	<stdio.h>
+	"..\MyDynamicLib\MyDynamicLib.h"
+
+1767122652 e:\_mega_drive\_c\c_static_dynamic_libs\dynamic\mydynamiclib\mydynamiclib.h
+

@@ -1,0 +1,27 @@
+
+LINUX MyDynamicLib
+------------------
+gcc -Wall -g  -c /home/paulo/Desktop/C_static_Dynamic_libs/Dynamic/MyDynamicLib/MyDynamicLib.c -o obj/Debug/MyDynamicLib.o
+gcc -shared  obj/Debug/MyDynamicLib.o  -o bin/Debug/libMyDynamicLib.so  
+
+
+
+
+In file included from /home/paulo/Desktop/C_static_Dynamic_libs/Dynamic/MyDynamicLib/MyDynamicLib.c:26:
+/home/paulo/Desktop/C_static_Dynamic_libs/Dynamic/MyDynamicLib/MyDynamicLib.h:9: warning: header guard ‘MY_DYNAMIC_LIB_H’ followed by ‘#define’ of a different macro [-Wheader-guard]
+    9 | #ifndef MY_DYNAMIC_LIB_H
+/home/paulo/Desktop/C_static_Dynamic_libs/Dynamic/MyDynamicLib/MyDynamicLib.h:10: note: ‘MY_STATIC_LIB_H’ is defined here; did you mean ‘MY_DYNAMIC_LIB_H’?
+   10 | #define MY_STATIC_LIB_H
+Output file is bin/Debug/libMyDynamicLib.so with size 17.70 KB
+Process terminated with status 0 (0 minute(s), 0 second(s))
+0 error(s), 1 warning(s) (0 minute(s), 0 second(s))
+ 
+gcc -Wall -g  -c /home/paulo/Desktop/C_static_Dynamic_libs/Dynamic/MyDynamicLib/MyDynamicLib.c -o obj/Debug/MyDynamicLib.o
+gcc -shared  obj/Debug/MyDynamicLib.o  -o bin/Debug/libMyDynamicLib.so  
+Output file is bin/Debug/libMyDynamicLib.so with size 17.70 KB
+-L ../MyDynamicLib/bin/Debug -l MyDynamicLib
+-----------------------------------------------------------------------------------
+TestDynamic (compiler: GN
+
+cc -Wall -g -L../MyDynamicLib/bin/Debug -lMyDynamicLib  -c /home/paulo/Desktop/C_static_Dynamic_libs/Dynamic/TestDynamic/main.c -o obj/Debug/main.o
+gcc  -o bin/Debug/TestDynamic obj/Debug/main.o   

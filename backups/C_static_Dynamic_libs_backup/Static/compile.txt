@@ -1,0 +1,52 @@
+
+1 - compile all in one exe file
+# gcc library.c program.c -o app 
+
+2 - compile to Static lib  file
+https://www.youtube.com/watch?v=uBzruZ2D8oE
+
+# gcc -c library.c -o lib_calc.o
+$ (lib extension in linux is -o , windows is .dll)
+$ if files*.h are in other folder add parameter (-I)  -Iother_folder, example  -I~/.includes
+
+
+# ar crs lib_calc.a lib1.o lib2.o lib3.0  (pack libraries in one file)
+
+#ranlib lib_calc.a   ?!?!??!
+
+-----------
+3 - compile file with Static lib
+
+gcc -o program program.c -l lib_calc
+
+
+#gcc -c main.c -o main.o
+#gcc main.o -L. lib_calc.a -o main
+
+
+------------------------------------------------------------------------
+
+99 - https://www.youtube.com/watch?v=UdMRcJwvWIY
+
+study -> #gcc hello.c -lm -o hello_dynamic
+         #file hello_dynamic
+		 
+         #gcc hello.c -lm -no-pie -o hello_dynamic2
+		 #file hello_dynamic2
+		  
+         #gcc hello.c -static -no-pie -o hello_static (-no-pie it's only for test next commands)
+		 #file hello_static
+		 #readelf -a hello_static | grep shared
+		 #readelf -a hello_static | grep interpreter
+		 #objdump -D hello_static > hello.dump
+		 
+		 
+		 
+
+		https://www.youtube.com/watch?v=JbHmin2Wtmc 
+		 
+-----------------------------------------------------		 
+		 
+https://www.youtube.com/watch?v=uBzruZ2D8oE
+procurar num ficheiro por palavras começadas por 
+# grep 'EXIT_' /usr/include/stdio.h
