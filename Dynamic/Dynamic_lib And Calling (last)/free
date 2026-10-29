@@ -1,0 +1,184 @@
+
+melhor solucao para C
+
+int myFunc(const char *msg, char *output_buffer, size_t buffer_size);
+
+typedef unsigned long long size_t;
+typedef long long int64_t;
+typedef unsigned long long uint64_t;
+
+typedef int int32_t; 
+typedef unsigned int uint32_t;
+
+
+Tamanho	Tipo em C (<stdint.h>)	Tipo no GnuCOBOL
+8 bits	int8_t/uint8_t	    BINARY-CHAR[SEM ASSINATURA]
+16 bits	int16_t/uint16_t	BINARY-SHORT[SEM ASSINATURA]
+32 bits	int32_t/uint32_t	BINARY-LONG[SEM ASSINATURA]
+64 bits	int64_t/ uint64_t/size_t	BINARY-DOUBLE[SEM ASSINATURA]
+1 bit    bool             	BOOLEAN[SEM ASSINATURA]
+
+
+No seu código do GnuCOBOL, está confortável sobre quando usar BINARY-LONG (para o int) e BINARY-DOUBLE (para o long long), ou quer fazer um teste rápido de chamada entre os dois para garantir que não há perda de dados?
+
+
+
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+*> 1. Definir a string que vai enviar
+01  WS-MSG             PIC X(6) VALUE "Hello" & X"00". *> Importante terminar com null byte para o C
+
+*> 2. Definir a variável que vai guardar o PONTEIRO retornado pelo C
+01  WS-XPTO-PTR        USAGE POINTER.
+
+PROCEDITION DIVISION.
+    
+    *> Chamar a função C. O resultado vai para o nosso ponteiro.
+    CALL "myFunc" USING BY REFERENCE WS-MSG 
+                  RETURNING WS-XPTO-PTR.
+
+    IF WS-XPTO-PTR NOT = NULL
+        *> ... [Processar/Usar a string apontada por WS-XPTO-PTR aqui] ...
+
+        *> LIBERTAR A MEMÓRIA: Chama o 'free' do C passando o ponteiro por VALOR
+        CALL "free" USING BY VALUE WS-XPTO-PTR
+        
+        *> Boa prática: Limpar o ponteiro no COBOL
+        SET WS-XPTO-PTR TO NULL
+    END-IF.
+    
+
+
+
+    *> Após chamar a função C e usar os dados...
+    IF WS-XPTO-PTR NOT = NULL
+        FREE WS-XPTO-PTR  *> O compilador liberta o Heap automaticamente
+        SET WS-XPTO-PTR TO NULL
+    END-IF.
+
+
+
+
+    STOP RUN.
+
+
+
+cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO-C-FROM-COBOL.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       *> 1. A string enviada para o C deve terminar com o byte nulo (X"00")
+       01  WS-MSG              PIC X(6) VALUE z"Hello".
+       
+       *> 2. A variável que vai receber o endereço da memória alocada pelo C
+       01  WS-XPTO-PTR         USAGE POINTER VALUE NULL.
+
+       LINKAGE SECTION.
+       *> 3. A estrutura correspondente ao texto que o C vai devolver.
+       *> Usamos 'BASED' porque não sabemos o endereço até o C o devolver.
+       01  LK-C-STRING         PIC X(100) BASED.
+
+       PROCEDURE DIVISION.
+      
+           *> Chamar a função C passando o argumento e capturando o ponteiro
+           CALL "myFunc" USING BY REFERENCE WS-MSG
+                         RETURNING WS-XPTO-PTR
+           END-CALL.
+
+           *> Validar se o C não devolveu um ponteiro nulo (falha de malloc)
+           IF WS-XPTO-PTR NOT = NULL
+               
+               *> Associar a nossa variável LINKAGE ao endereço de memória do C
+               SET ADDRESS OF LK-C-STRING TO WS-XPTO-PTR
+               
+               *> Exibir o resultado (O GnuCOBOL lê até encontrar o byte nulo)
+               DISPLAY "Resultado do C: " DISPLAY-OF(LK-C-STRING)
+               
+               *> ---------------------------------------------------
+               *> A SOLUÇÃO DO MEMORY LEAK: Libertar a memória no GnuCOBOL
+               *> ---------------------------------------------------
+               FREE WS-XPTO-PTR
+               
+               *> Boa prática: Limpar o ponteiro no COBOL após libertar
+               SET WS-XPTO-PTR TO NULL
+               
+           ELSE
+               DISPLAY "Erro: A função C retornou NULL!"
+           END-IF.
+
+           STOP RUN.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O Truque da Memória Estática em C
+
+Em vez de usares o malloc (que exige o free), crias um buffer fixo na memória global ou estática da tua biblioteca C. Este buffer fica vivo durante toda a execução do programa e é reutilizado a cada chamada.
+c
+#include <string.h>
+
+// Criamos um buffer estático interno na Lib C. 
+// O COBOL não precisa de limpar isto, o C gere sozinho na sua própria memória.
+#define BUFFER_MAX_SIZE 1024
+static char bufferResultado[BUFFER_MAX_SIZE];
+
+char* printmessage(const char* ptrSource, int length)
+{
+    const char* sufix = " print message";
+    int lengthSufix = (int)strlen(sufix);
+    int lengthTotal = length + lengthSufix;
+
+    // Proteção básica para não estourar o nosso buffer fixo
+    if (lengthTotal >= BUFFER_MAX_SIZE) {
+        return NULL; 
+    }
+
+    // Montamos o texto diretamente no buffer estático
+    memcpy(bufferResultado, ptrSource, length);
+    bufferResultado[length] = '\0';
+    strcat(bufferResultado, sufix);
+
+    // Devolvemos o ponteiro simples para o COBOL
+    return bufferResultado; 
+}
+Use o código com cuidado.
+
+Como o COBOL recebe isto com simplicidade:
+
+No COBOL, tu recebes esse char* diretamente como um ponteiro e podes mapeá-lo ou lê-lo sem nunca te preocupares em fazer free.
+cobol
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01  WS-SOURCE       PIC X(3) VALUE "Ola".
+01  WS-LENGTH       PIC S9(9) COMP VALUE 3.
+01  WS-RESULT-PTR   POINTER.
+
+PROCEDURE DIVISION.
+    * O C processa e devolve o endereço do buffer estático dele
+    CALL "printmessage" USING BY REFERENCE WS-SOURCE
+                             BY VALUE     WS-LENGTH
+                        RETURNING WS-RESULT-PTR.
+    
+    * ZERO FREES! A memória pertence à Lib C e não há vazamentos.
+    GOBACK.
+Use o código com cuidado.
+
+A única limitação deste modelo elegante:
+
+Como o bufferResultado é partilhado, se o COBOL chamar a função duas vezes seguidas, a segunda chamada vai sobrescrever o texto da primeira. Por isso, o COBOL deve ler ou copiar o resultado logo após a chamada. Para testes e chamadas sequenciais simples, esta é a solução mais limpa e que mais se aproxima do comportamento de linguagens de alto nível!
+Como este truque do buffer estático elimina o problema do free fora da função, achas que resolve o cenário do teu teste de integração entre as duas linguagens?
+

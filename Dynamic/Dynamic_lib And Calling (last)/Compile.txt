@@ -1,0 +1,28 @@
+
+other
+-----
+gcc -c -fPIC -o other.o other.c 
+gcc -shared -o libother.dll other.o -DBUILD_DLL_EXPORT
+
+math
+----
+gcc -c -fPIC -o math.o math.c 
+gcc -shared -o libmath.dll math.o -DBUILD_DLL_EXPORT 
+
+main
+----
+gcc -c -o main.o main.c
+gcc main.o -o program -L. -lmath -lother 
+
+cobol (first time run:./CobolStart.ps1) 
+-----
+cobc -x -o main.exe main.cbl -L. -lmath -lother fstatic-call
+
+-------------------------------------------------------------
+
+cobc -m module.cbl
+cobc -x Call_Cobol.cbl
+
+
+*join
+*cobc -x Call_Cobol.cbl modulo.cbl
