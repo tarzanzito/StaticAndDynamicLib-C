@@ -1,0 +1,29 @@
+1 - Menu / View / Command Pallete
+2 - search for: Referencess: Open User Settings (JSON)
+
+- its open a json file settings.json
+3 - goto to the end off file. before las '}'
+4 - Insert (look if is need ',' before and/or after element block)
+
+
+   //My Terminal - INI
+    "terminal.integrated.profiles.windows": {
+        "MSYS2 UCRT64 COBOL": {
+            "path": "C:\\msys64\\usr\\bin\\bash.exe",
+            "args": [
+                "--login", "-i",
+                "-c", "source CobolStart.sh && exec bash"
+            ],
+            "env": {
+                "MSYSTEM": "UCRT64",
+                "CHERE_INVOKING": "1"
+            }
+ 
+        }
+    }
+   //My Terminal - END
+
+
+9 - this entry set default terminal (look if is need ',' before and/or after element)
+"terminal.integrated.defaultProfile.windows": "MSYS2 UCRT64 COBOL"
+

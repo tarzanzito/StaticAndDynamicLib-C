@@ -1,13 +1,20 @@
 
 #
-# Objectivo: Este script abre o terminal MSYS2 (C:\msys64\ucrt64.exe) e corre de imediato "cobenv.sh (COBOL)
+# Objectivo: Dentro do VSCODE este script serve para abrir um terminal MSYS2 (C:\msys64\ucrt64.exe)
+# e preparar o ambiente para COBOL "cobenv.sh"
 #
-#Este script é para ser executado no PowerShell do Windows, e tem como objetivo abrir o terminal MSYS2
-# e executar o ficheiro cobenv.sh (que configura o ambiente de desenvolvimento Cobol) automaticamente.
+#Este script é executado no terminal PowerShell dentro do VSCODE do Windows, 
+#Abre o terminal MSYS2, executa o ficheiro cobenv.sh (que configura o
+# ambiente de desenvolvimento Cobol) automaticamente.
+#
+#tecnica
 #Adiciona os comandos entre # --- BEGIN COMMANDS --- e # --- END COMMANDS ---
-#Ao .bashrc  do utilizador no MSYS2, para que sejam executados sempre que o terminal for aberto.
-#Depois bashrc é limpo para não executar novamente na próxima vez que o terminal for aberto. 
-#Repoe a estrutura original do .bashrc.
+# ao ".bashrc" do utilizador para um terminal MSYS2. ".bashrc" é executo automaticamente por cada abertura de
+# terminal. 
+#Adicionamos comandos extra, nomeadamente "codbenv.sh".
+#Depois ".bashrc" executado sendo a ultima tarefa limpar os comadnos extra (que estão) entre
+# --- BEGIN COMMANDS --- e # --- END COMMANDS ---
+#Assim eepoe a estrutura original do .bashrc.
 #
 
 $currentDir = Get-Location

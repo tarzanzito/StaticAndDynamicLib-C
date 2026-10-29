@@ -51,3 +51,12 @@ Options	Details
 -Dfoo[=bar]	compile time macro: same as saying #define foo [bar] in your source file
 -std=[c89, c99, c11, c17, gnu-x]	enforces compliance to a given version of c.
 -Lwhatever	adds whatever to the library search dir (so if you do gcc -Lwhatever -lbla, you might link to whatever/libbla.so).
+
+
+
+ As Quatro Funções Essenciais
+
+• malloc(size): Aloca um bloco de memória do tamanho solicitado (em bytes). Os dados na memória não são limpos, ou seja, contêm "lixo" residual.
+• calloc(num, size): Aloca memória para um array de elementos e limpa todos os bits para zero. É ligeiramente mais lenta que o malloc.
+• realloc(ptr, new_size): Altera o tamanho de um bloco de memória já alocado. Pode expandir ou encolher o bloco, movendo os dados para um novo local se necessário.
+• free(ptr): Libera a memória de volta para o sistema operacional. Sempre deve ser chamada quando a memória não for mais necessária.

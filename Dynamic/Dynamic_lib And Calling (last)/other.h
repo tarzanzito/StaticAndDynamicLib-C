@@ -18,8 +18,9 @@
 //BUILD_DLL_EXPORT const char * printmessage(char * msg); 
 
 //metodo seguro, que não gera memory leak, mas precisa de um buffer para receber a string
-DLL_EXPORT void printmessage(const char* ptrSource, char* ptrReturn, size_t lengthSource,  size_t lengthReturn);
-DLL_EXPORT void printmessageTemp(const char* ptrSource, char* ptrReturn, size_t lengthSource,  size_t lengthReturn);
+DLL_EXPORT void printmessage(const char* ptrSource, size_t lengthSource, char* ptrReturn, size_t lengthReturn);
+DLL_EXPORT void printmessage_temp(const char* ptrSource, size_t lengthSource, char* ptrReturn, size_t lengthReturn);
+DLL_EXPORT void printmessage_pro(char* destino, size_t tam_max, const char* s1, const char* s2);
 
 DLL_EXPORT int subtract(int a, int b);
 

@@ -10,7 +10,7 @@
 // }
 
 
-void printmessageTemp(const char* ptrSource, char* ptrReturn, size_t lengthSource,  size_t lengthReturn)
+void printmessageTemp(const char* ptrSource,  size_t lengthSource, char* ptrReturn, size_t lengthReturn)
 {
     printf("Func:printmessageTemp\n");
 
@@ -25,7 +25,7 @@ void printmessageTemp(const char* ptrSource, char* ptrReturn, size_t lengthSourc
         return;
     }
 
-    // memory alocation: lengthTotal + 1 byte for '\0'
+    // memory allocation: lengthTotal + 1 byte for '\0'
     char* ptrTemp = (char*)malloc((lengthTotal + 1) * sizeof(char));
     if (ptrTemp == NULL) return;
 
@@ -47,9 +47,9 @@ void printmessageTemp(const char* ptrSource, char* ptrReturn, size_t lengthSourc
     free(ptrTemp);
 }
 
-void printmessage(const char* ptrSource, char* ptrReturn, size_t lengthSource, size_t lengthReturn)
+void printmessage(const char* ptrSource, size_t lengthSource, char* ptrReturn, size_t lengthReturn)
 {
-        printf("Func:printmessage\n");
+    printf("Func:printmessage\n");
 
     const char* sufix = " print message";
     size_t lengthSufix = strlen(sufix);
@@ -70,6 +70,24 @@ void printmessage(const char* ptrSource, char* ptrReturn, size_t lengthSource, s
 
     // 5. Imprime o resultado final direto do destino
     printf("Message: %s\n", ptrReturn);
+}
+
+void printmessage_pro(char* destino, size_t tam_max, const char* s1, const char* s2) {
+    size_t len1 = strnlen(s1, tam_max);
+    size_t len2 = strnlen(s2, tam_max);
+
+    // Validação estrita de segurança antes de tocar na memória
+    if (len1 + len2 + 1 > tam_max) {
+        // Trata o erro de tamanho insuficiente (ex: retorna código de erro)
+        return; 
+    }
+
+    // Copia os blocos de memória diretamente (muito mais rápido que strcat)
+    memcpy(destino, s1, len1);
+    memcpy(destino + len1, s2, len2);
+    
+    // Adiciona manualmente o caractere nulo no local exato
+    destino[len1 + len2] = '\0';
 }
 
 
