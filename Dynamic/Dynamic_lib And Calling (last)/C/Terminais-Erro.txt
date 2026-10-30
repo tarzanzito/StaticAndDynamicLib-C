@@ -1,9 +1,10 @@
 windows problem
 ----------------
+- "silent crash" (fecho silencioso) - no arraque da aplicação se não encontrar as dll necessarias
+  o programa termina sem mostrar erros. Embora o return code seja diferente de zero.
+ 
 
-Tanto nos terminais MSYS2-64 (UCRT64) , powershell e msdos caso a dll nao exista ou tenha outro nome o programa executa e não mostra erro.
-Mas vem com return code diferente de  zero.
-Chamdo  silent crash (fecho silencioso) 
+- Acontece nos terminais MSYS2-64 (UCRT64) , powershell
 
 
 Proposta para windows:

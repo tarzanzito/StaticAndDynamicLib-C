@@ -1,20 +1,17 @@
-
 #
-# Objectivo: Dentro do VSCODE este script serve para abrir um terminal MSYS2 (C:\msys64\ucrt64.exe)
-# e preparar o ambiente para COBOL "cobenv.sh"
+#Objectivo:
+# Abrir um terminal MSYS2 - ucrt64(C:\msys64\ucrt64.exe)
+# e preparar o ambiente para COBOL executando "cobenv.sh"
 #
-#Este script é executado no terminal PowerShell dentro do VSCODE do Windows, 
-#Abre o terminal MSYS2, executa o ficheiro cobenv.sh (que configura o
-# ambiente de desenvolvimento Cobol) automaticamente.
+#tecnica:
+# - Adiciona os comandos entre # --- BEGIN COMMANDS --- e # --- END COMMANDS ---
+# ao ".bashrc" do utilizador para um terminal MSYS2. "
+# - ".bashrc" é executo automaticamente por cada abertura de terminal.
 #
-#tecnica
-#Adiciona os comandos entre # --- BEGIN COMMANDS --- e # --- END COMMANDS ---
-# ao ".bashrc" do utilizador para um terminal MSYS2. ".bashrc" é executo automaticamente por cada abertura de
-# terminal. 
 #Adicionamos comandos extra, nomeadamente "codbenv.sh".
-#Depois ".bashrc" executado sendo a ultima tarefa limpar os comadnos extra (que estão) entre
+#Depois ".bashrc" ser executado a ultima tarefa é limpar os comandos extra (que estão) entre
 # --- BEGIN COMMANDS --- e # --- END COMMANDS ---
-#Assim eepoe a estrutura original do .bashrc.
+#Assim repoe a estrutura original do .bashrc.
 #
 
 $currentDir = Get-Location
@@ -55,7 +52,7 @@ export PS1="\[\e[0m\]:\$ "
 #export PS1="\[\e[32m\]\u@\h\[\e[0m\]:\$ "
 #export PS1="\[\e[32m\]\u@\h \[\e[35m\]UCRT64\[\e[0m\] \[\e[33m\]\$\[\e[0m\] "
 
-printf "pwd\n\e[33m[%s]\e[0m\n\n" "$(pwd)"
+printf 'Ready to Compile Cobol programs\n\n'
 
 # Remove este proprio bloco para nao correr nas proximas vezes que se abrir o terminal
 #sed -i '/# --- BEGIN COMMANDS ---/,/# --- END COMMANDS ---/d' ~/.bashrc 
@@ -71,7 +68,7 @@ sed -i -e '/# --- BEGIN COMMANDS ---.*/,/# --- END COMMANDS ---.*/d' ~/.bashrc
 #Read-Host "ENTER para continuar"
 
 # 4. Add commands at end end of .bashrc
-#(NOTA Add-Content adiciona crlf no final do ficheiro, se nao quiseres usa -NoNewline)
+#(NOTA "Add-Content" adiciona crlf poromissão no final do ficheiro, -NoNewline nao coloca)
 Add-Content -Path $bashrcPath -Value $linesToAppend -NoNewline   
 
 # 5. Start terminal normalmente (exceute .bashrc and rest opened!)

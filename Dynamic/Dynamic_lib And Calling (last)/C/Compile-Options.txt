@@ -1,9 +1,9 @@
 
-gcc -E -o main.pre main.c    , Preprocess generate one file with all includes encontrada
+gcc -E -o main.i main.c    , Preprocess generate one file with all includes encontrada (ext .i)
 
-gcc -S -o main.asm main.pre  , generate assemblu code
+gcc -S -o main.s main.i  , generate assemblu code  (ext .s)
 
-gcc -C  -o main.o main.asm   , compile to object.
+gcc -C -o main.o main.s   , compile to object. (ext .o)
 
 gcc -o main.exe main.o   , gera executavel, O GCC gera um executável por padrão se nenhuma for passada.
 

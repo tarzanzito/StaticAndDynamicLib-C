@@ -1,7 +1,7 @@
 
 melhor solucao para C
 
-int myFunc(const char *msg, char *output_buffer, size_t buffer_size);
+int myFunc(const char * p_in, size_t size_in, char * p_out, size_t size_in);
 
 typedef unsigned long long size_t;
 typedef long long int64_t;

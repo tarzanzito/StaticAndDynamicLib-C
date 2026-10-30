@@ -1,0 +1,88 @@
+
+https://www.facebook.com/profile.php?id=61574701086049
+https://www.facebook.com/profile.php?id=61591537755192
+
+===================================================
+1. Estilo K&R / OTBS (One True Brace Style)
+
+void Xpto() {
+    // código
+}
+
+
+2. Estilo Allman (ou estilo BSD)
+
+c
+void Xpto()
+{
+    // código
+}
+======================================================
+
+
+
+Esqueça o formato do Java/C#. O C de produção (padrão Linux/BSD) segue rigorosamente esta anatomia:
+c
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Protótipos mantêm o asterisco junto ao nome */
+int *procurar_dados(int *vetor, int tamanho, int alvo);
+
+int *
+procurar_dados(int *vetor, int tamanho, int alvo)
+{
+    int i;
+
+    /* O C tradicional declara as variáveis no topo do bloco */
+    if (vetor == NULL || tamanho <= 0) {
+        return NULL;
+    }
+
+    for (i = 0; i < tamanho; i++) {
+        if (vetor[i] == alvo) {
+            return &vetor[i];
+        } else {
+            /* Código complementar aqui */
+        }
+    }
+
+    return NULL;
+}
+
+=====================================================
+NAMING C
+Use o código com cuidado.
+
+Regras de Ouro de Naming e Estilo no C
+
+Como vem do Java e C#, terá de reescrever a sua memória muscular para estes três pontos:
+
+• snake_case absoluto: Esqueça o camelCase (Java) e o PascalCase (C#). 
+Em C, funções, variáveis e ficheiros usam letras minúsculas separadas por underscore (ex: abrir_ficheiro, id_utilizador).
+
+• Constantes e Macros: Sempre em maiúsculas (#define BUFFER_SIZE 1024).
+
+• Declaração de Variáveis:
+ No C clássico (C89), todas as variáveis locais devem ser declaradas logo no início da função, antes de qualquer código executável.
+ Embora o C moderno (C99+) permita declará-las em qualquer lado (como no for (int i...)), o código de sistemas profissional prefere frequentemente o isolamento no topo para controlo estrito do stack.
+ 
+* enum
+enum calculate { 
+    SUM, DIFFERENCE, PRODUCT, QUOTIENT
+};
+
+enum item{
+    PRODUCT, SERVICE
+};
+
+main
+{
+  enum calculate calc = PRODUCT;
+}
+
+* struct
+
+* typedef
+
+Para alinhar o seu ambiente de desenvolvimento com estes padrões nativos, quer que o ajude a configurar um ficheiro de regras .clang-format? Ele formata o seu código C automaticamente ao gravar no VS Code ou CLion, garantindo que segue o padrão escolhido sem esforço.
